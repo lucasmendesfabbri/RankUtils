@@ -36,8 +36,7 @@ public class PlayerJoin implements Listener{
 		}else {
 			this.instance.playerManager().hasExpired(p);
 		}
-		score.put(event.getPlayer(), "ativado");
-		new ScoreboardManager().setarBoard(event.getPlayer());
+		new ScoreboardManager().scoreboard(event.getPlayer());
 	}
 
 	public PlayerManager getPlayerManager() {
