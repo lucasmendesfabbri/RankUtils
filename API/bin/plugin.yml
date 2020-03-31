@@ -1,0 +1,8 @@
+name: API
+version: 0.1
+author: lucasmendes
+description: Twitter @lucasmendesf
+main: br.com.lucas.api.API
+commands:
+   rank:
+   tpa:
