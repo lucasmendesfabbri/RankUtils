@@ -32,11 +32,11 @@ public class CommandRank implements CommandExecutor{
 
 			if(pc.playerRank().equals(RankEnum.MASTER)||p.isOp()) {
 				if(args.length == 0) {
-					sender.sendMessage("§bUse /rank <player> <cargo> (MENSAL | ANUAL | PERMAMENTE)");
+					sender.sendMessage("Â§bUse /rank <player> <cargo> (MENSAL | ANUAL | PERMAMENTE)");
 					return true;
 				}
 				if(args.length > 3) {
-					sender.sendMessage("§bUse /rank <player> <cargo> (MENSAL | ANUAL | PERMAMENTE)");
+					sender.sendMessage("Â§bUse /rank <player> <cargo> (MENSAL | ANUAL | PERMAMENTE)");
 					return true;
 				}
 				long timer = 0;
@@ -46,7 +46,7 @@ public class CommandRank implements CommandExecutor{
 				PlayerConstructor pt = this.instance.playerManager().getPlayer(target.getUniqueId());
 
 				if(!target.isOnline()) {
-					sender.sendMessage("§cO jogador está offline!");
+					sender.sendMessage("Â§cO jogador estÃ¡ offline!");
 					return true;
 				}else {
 
@@ -55,7 +55,7 @@ public class CommandRank implements CommandExecutor{
 							if(args[1].equalsIgnoreCase(RankEnum.valueOf(args[1].toUpperCase()).toString())) {
 								RankEnum prank = RankEnum.valueOf(args[1].toUpperCase());
 								if(pt.playerRank()==prank) {
-									sender.sendMessage("§cO jogador já pertence ao grupo!");
+									sender.sendMessage("Â§cO jogador jÃ¡ pertence ao grupo!");
 								}else
 									if(prank == RankEnum.MASTER||prank == RankEnum.ADMIN||prank == RankEnum.MEMBRO) {
 										if(prank == RankEnum.MASTER&&!p.isOp()) {
@@ -66,15 +66,15 @@ public class CommandRank implements CommandExecutor{
 										pt.setExpire(-1);
 										pt.setRankEnum(prank);
 										this.instance.playerManager().hasExpired(pt);
-										p.sendMessage("§aVocê adicionou o cargo '"+pt.playerRank()+"' para o player '"+target.getName()+"' que irá expirar " + pt.formatDateExpire()+"§a!" );
+										p.sendMessage("Â§aVocÃª adicionou o cargo '"+pt.playerRank()+"' para o player '"+target.getName()+"' que irÃ¡ expirar " + pt.formatDateExpire()+"Â§a!" );
 										this.instance.playerManager().updateProfile(pt.playerUniqueId());
 									}else if(args[2].equalsIgnoreCase("mensal")) {
 										if(!prank.isVip()&&prank.isStaff()) {
-											sender.sendMessage("§cO Rank não poderá ser MENSAL/ANUAL/PERMAMENTE.");
+											sender.sendMessage("Â§cO Rank nÃ£o poderÃ¡ ser MENSAL/ANUAL/PERMAMENTE.");
 										}else
 											if(prank.isVip()) {
 
-												timer = TimeUnit.MILLISECONDS.convert(12, TimeUnit.SECONDS);
+												timer = TimeUnit.MILLISECONDS.convert(30, TimeUnit.DAYS);
 												total = System.currentTimeMillis() + timer; duration = total;
 												pt.setOldRank(RankEnum.MEMBRO);
 												pt.setRankEnum(prank);
@@ -82,17 +82,17 @@ public class CommandRank implements CommandExecutor{
 												pt.setExpire(duration);
 												this.instance.playerManager().updateProfile(pt.playerUniqueId());
 												this.instance.playerManager().hasExpired(pt);
-												p.sendMessage("§aVocê adicionou o cargo '"+pt.playerRank()+"' para o player '"+target.getName()+"' que irá expirar " + pt.formatDateExpire()+"§a!" );
+												p.sendMessage("Â§aVocÃª adicionou o cargo '"+pt.playerRank()+"' para o player '"+target.getName()+"' que irÃ¡ expirar " + pt.formatDateExpire()+"Â§a!" );
 												for(Player players : Bukkit.getServer().getOnlinePlayers()) {
-													new PacketsTitle(players, pt.playerRank().getPrefix() + " " + target.getName(), "§ftornou-se "+pt.playerRank().getPrefix()+"");
-													new PacketsAction(pt.playerRank().getPrefix() + " " + target.getName()+" §ftornou-se " +pt.playerRank().getPrefix()+"").sendToPlayer(players);
+													new PacketsTitle(players, pt.playerRank().getPrefix() + " " + target.getName(), "Â§ftornou-se "+pt.playerRank().getPrefix()+"");
+													new PacketsAction(pt.playerRank().getPrefix() + " " + target.getName()+" Â§ftornou-se " +pt.playerRank().getPrefix()+"").sendToPlayer(players);
 												}
 											}
 										return true;
 
 									}else if(args[2].equalsIgnoreCase("anual")) {
 										if(!prank.isVip()&&prank.isStaff()) {
-											sender.sendMessage("§cO Rank não poderá ser MENSAL/ANUAL/PERMAMENTE.");
+											sender.sendMessage("Â§cO Rank nÃ£o poderÃ¡ ser MENSAL/ANUAL/PERMAMENTE.");
 										}else {
 											if(prank.isVip()) {
 												timer = TimeUnit.MILLISECONDS.convert(30, TimeUnit.DAYS)*12;
@@ -103,10 +103,10 @@ public class CommandRank implements CommandExecutor{
 												pt.setExpire(duration);
 												this.instance.playerManager().updateProfile(pt.playerUniqueId());
 												this.instance.playerManager().hasExpired(pt);
-												p.sendMessage("§aVocê adicionou o cargo '"+pt.playerRank()+"' para o player '"+target.getName()+"' que irá expirar " + pt.formatDateExpire()+"§a!" );
+												p.sendMessage("Â§aVocÃª adicionou o cargo '"+pt.playerRank()+"' para o player '"+target.getName()+"' que irÃ¡ expirar " + pt.formatDateExpire()+"Â§a!" );
 												for(Player players : Bukkit.getServer().getOnlinePlayers()) {
-													new PacketsTitle(players, pt.playerRank().getPrefix() + " " + target.getName(), "§ftornou-se "+pt.playerRank().getPrefix()+"");
-													new PacketsAction(pt.playerRank().getPrefix() + " " + target.getName()+" §ftornou-se " +pt.playerRank().getPrefix()+"").sendToPlayer(players);
+													new PacketsTitle(players, pt.playerRank().getPrefix() + " " + target.getName(), "Â§ftornou-se "+pt.playerRank().getPrefix()+"");
+													new PacketsAction(pt.playerRank().getPrefix() + " " + target.getName()+" Â§ftornou-se " +pt.playerRank().getPrefix()+"").sendToPlayer(players);
 												}
 
 											}
@@ -114,7 +114,7 @@ public class CommandRank implements CommandExecutor{
 
 									}else if(args[2].equalsIgnoreCase("permamente")) {
 										if(!prank.isVip()&&prank.isStaff()) {
-											sender.sendMessage("§cO Rank não poderá ser MENSAL/ANUAL/PERMAMENTE.");
+											sender.sendMessage("Â§cO Rank nÃ£o poderÃ¡ ser MENSAL/ANUAL/PERMAMENTE.");
 										}else {
 											if(prank.isVip()) {
 												pt.setOldRank(RankEnum.MEMBRO);
@@ -123,15 +123,15 @@ public class CommandRank implements CommandExecutor{
 												pt.setExpire(-1);
 												this.instance.playerManager().updateProfile(pt.playerUniqueId());
 												this.instance.playerManager().hasExpired(pt);
-												p.sendMessage("§aVocê adicionou o cargo '"+pt.playerRank()+"' para o player '"+target.getName()+"' que irá expirar " + pt.formatDateExpire()+"§a!" );
+												p.sendMessage("Â§aVocÃª adicionou o cargo '"+pt.playerRank()+"' para o player '"+target.getName()+"' que irÃ¡ expirar " + pt.formatDateExpire()+"Â§a!" );
 												for(Player players : Bukkit.getServer().getOnlinePlayers()) {
-													new PacketsTitle(players, pt.playerRank().getPrefix() + " " + target.getName(), "§ftornou-se "+pt.playerRank().getPrefix()+"");
-													new PacketsAction(pt.playerRank().getPrefix() + " " + target.getName()+" §ftornou-se " +pt.playerRank().getPrefix()+"").sendToPlayer(players);
+													new PacketsTitle(players, pt.playerRank().getPrefix() + " " + target.getName(), "Â§ftornou-se "+pt.playerRank().getPrefix()+"");
+													new PacketsAction(pt.playerRank().getPrefix() + " " + target.getName()+" Â§ftornou-se " +pt.playerRank().getPrefix()+"").sendToPlayer(players);
 												}
 											}
 										}
 									}else {
-										sender.sendMessage("§bUse /rank <player> <cargo> (MENSAL | ANUAL | PERMAMENTE)");
+										sender.sendMessage("Â§bUse /rank <player> <cargo> (MENSAL | ANUAL | PERMAMENTE)");
 									}
 								return true;
 							}
@@ -139,13 +139,13 @@ public class CommandRank implements CommandExecutor{
 
 						return true;
 					}else {
-						sender.sendMessage("§cO jogador '"+target.getName()+"' nunca foi registrado.");
+						sender.sendMessage("Â§cO jogador '"+target.getName()+"' nunca foi registrado.");
 						return true;
 					}
 				}
 
 			}else {
-				sender.sendMessage("§cVocê não possui permissão para utilizar o comando /rank!");
+				sender.sendMessage("Â§cVocÃª nÃ£o possui permissÃ£o para utilizar o comando /rank!");
 			}
 
 
